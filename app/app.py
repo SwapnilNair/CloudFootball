@@ -15,8 +15,6 @@ def main():
     menu = ["Initialize & Query" ,"Add", "Delete", "Update", "View"]
     choice = st.sidebar.selectbox("Operations", menu)
 
-    create_tables()
-
     if choice == "Add":
         st.subheader("Input Player Details")
         create()

@@ -1,17 +1,15 @@
 import cv2
 import pandas as pd
 import streamlit as st
-from database import run_query, populate
+from database import run_query, create_tables
 
 
 def query():
 
-    st.subheader("Populate :")
-    if st.button("Initialize the database"):
-        populate()
+    if st.button("Initialize DB"):
+        create_tables()
         st.success("Database successfully populated.")
-
-    st.subheader("Query :")
+        
     query = st.text_input('Query')
     if st.button("Run query"):
         result = run_query(query)

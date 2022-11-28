@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 import mysql.connector
 
@@ -9,7 +10,7 @@ def create_tables():
     password="admin",
     database="dbmsproject"
     )
-
+    
     c = mydb.cursor(buffered=True)
     with open('/home/sr42/Projects/football-db/databaseSetup.sql', 'r') as f:
         c.execute(f.read(), multi=True)
@@ -116,16 +117,3 @@ def run_query(query):
     )
     df = pd.read_sql(query, con=mydb)
     return df
-
-def populate():
-    mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="admin",
-    database="dbmsproject"
-    )
-
-    c = mydb.cursor(buffered=True)
-    c.execute('source /home/sr42/Projects/football-db/databaseSetup.sql')
-    mydb.commit()
-    c.close()
