@@ -1,26 +1,21 @@
 import streamlit as st
 from database import add_data
 
-# player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id
-# (%d,%s,%s,%s,%s,%s,%d,%f,%d)
+# league_id, league_name, country, sponsors, current_champions, top_scorer
 
 def create():
     col1, col2 = st.columns(2)
 
     with col1:
-        player_id = st.text_input('Player ID')
-        player_name_surname = st.text_input("Player Name")
-        position = st.selectbox("Type: ", ["Forward", "Midfield", "Defender", "Goalkeeper"])
-        nationality = st.text_input("Nationality")
+        league_id = st.text_input('League ID')
+        league_name = st.text_input("League Name")
+        country = st.text_input("Country of Origin")
 
     with col2:
-        player_contract_start_date = st.text_input("Contract Start Date (YYYY-MM-DD)")
-        player_contract_end_date = st.text_input("Contract End Date (YYYY-MM-DD)")
-        age = st.text_input('Age')
-        current_market_value = st.text_input("Current Market Value (In Millions of USD)")
-
-    team_id = st.text_input('Team ID')
+        sponsor = st.text_input("Primary Sponsor")
+        current_champion = st.text_input("Current Champion (Team)")
+        top_scorer = st.text_input('Top Scorer (Player)')
 
     if st.button("Commit to Database"):
-        add_data(player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id)
-        st.success("Successfully added player: {}".format(player_name_surname))
+        add_data(league_id, league_name, country, sponsor, current_champion, top_scorer)
+        st.success("Successfully added League: {}".format(league_name))

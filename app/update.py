@@ -6,32 +6,19 @@ from database import view_all_data, view_only_dealer_names, get_dealer, edit_dea
 def update():
     result = view_all_data()
     # st.write(result)
-    df = pd.DataFrame(result, columns=['player_id', 'player_name_surname', 'position', 'nationality', 'player_contract_start_date', 'player_contract_end_date', 'age', 'current_market_value', 'team_id'])
-    with st.expander("Players in roster :"):
+    df = pd.DataFrame(result, columns=['league_id', 'league_name', 'country', 'sponsors', 'current_champions', 'top_scorer'])
+    with st.expander("Leagues in roster :"):
         st.dataframe(df)
-    list_of_players = [i[0] for i in view_only_dealer_names()]
-    selected_players = st.selectbox("Players to edit", list_of_players)
-    selected_result = get_dealer(selected_players)
-    # st.write(selected_result)
+    list_of_leagues = [i[0] for i in view_only_dealer_names()]
+    selected_leagues = st.selectbox("Leagues to edit", list_of_leagues)
+    selected_result = get_dealer(selected_leagues)
     
     if selected_result:
-        player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id = selected_result[0][0], selected_result[0][1], selected_result[0][2], selected_result[0][3], selected_result[0][4], selected_result[0][5], selected_result[0][6], selected_result[0][7], selected_result[0][8]
-
-        # Layout of Create
+        league_id, league_name, country, current_champion, sponsor, top_scorer = selected_result[0][0], selected_result[0][1], selected_result[0][2], selected_result[0][3], selected_result[0][4], selected_result[0][5]
         
         col1, col2 = st.columns(2)
 
         '''
-        with col1:
-            new_Train_id = st.text_input("ID:", Train_id)
-            new_Train_name = st.text_input("Name:", Train_name)
-        with col2:
-            new_Train_type = st.selectbox(Train_type, ["Superfast", "Fast", "Mail"])
-            new_Source = st.text_input("Source:", Source)
-        new_Destination = st.text_input("Destination:", Destination)
-        new_Availability = st.text_input("Availability:", Availability)
-        '''
-
         with col1:
             player_id = st.text_input('Player ID', player_id)
             player_name_surname = st.text_input("Player Name", player_name_surname)
@@ -45,12 +32,25 @@ def update():
             current_market_value = st.text_input("Current Market Value (In Millions of USD)", current_market_value)
             
         team_id = st.text_input('Team ID', team_id)
+        '''
 
-        if st.button("Update Player"):
-            edit_dealer_data(player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id)
+        col1, col2 = st.columns(2)
+
+        with col1:
+            league_id1 = st.text_input('League ID', league_id)
+            league_name1 = st.text_input("League Name", league_name)
+            country1 = st.text_input("Country of Origin", country)
+
+        with col2:
+            sponsor1 = st.text_input("Primary Sponsor", sponsor)
+            current_champion1 = st.text_input("Current Champion (Team)", current_champion)
+            top_scorer1 = st.text_input('Top Scorer (Player)', top_scorer)
+
+        if st.button("Update League"):
+            edit_dealer_data(league_id, league_name, country, sponsor, current_champion, top_scorer, league_id1, league_name1, country1, sponsor1, current_champion1, top_scorer1)
             st.success("Successfully updated record")
 
     result2 = view_all_data()
-    df2 = pd.DataFrame(result2, columns=['player_id', 'player_name_surname', 'position', 'nationality', 'player_contract_start_date', 'player_contract_end_date', 'age', 'current_market_value', 'team_id'])
+    df2 = pd.DataFrame(result2, columns=['league_id', 'league_name', 'country', 'sponsor', 'current_champions', 'top_scorer'])
     with st.expander("Updated data"):
         st.dataframe(df2)

@@ -17,7 +17,7 @@ def create_tables():
     c.close()
 
 
-def add_data(player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id):
+def add_data(league_id, league_name, country, sponsors, current_champions, top_scorer):
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -26,8 +26,8 @@ def add_data(player_id, player_name_surname, position, nationality, player_contr
     )
     
     c = mydb.cursor(buffered=True)
-    c.execute('INSERT INTO football_player(player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-              (player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id))
+    c.execute('INSERT INTO league(league_id, league_name, country, sponsors, current_champions, top_scorer) VALUES (%s,%s,%s,%s,%s,%s)',
+              (league_id, league_name, country, sponsors, current_champions, top_scorer))
     mydb.commit()
     c.close()
 
@@ -41,7 +41,7 @@ def view_all_data():
     )
     
     c = mydb.cursor(buffered=True)
-    c.execute('SELECT * FROM football_player')
+    c.execute('SELECT * FROM league')
     data = c.fetchall()
     c.close()
     return data
@@ -56,13 +56,13 @@ def view_only_dealer_names():
     )
     
     c = mydb.cursor(buffered=True)
-    c.execute('SELECT player_name_surname FROM football_player')
+    c.execute('SELECT league_name FROM league')
     data = c.fetchall()
     c.close()
     return data
 
 
-def get_dealer(player_name):
+def get_dealer(league_name):
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -71,13 +71,13 @@ def get_dealer(player_name):
     )
     
     c = mydb.cursor(buffered=True)
-    c.execute('SELECT * FROM football_player WHERE player_name_surname="{}"'.format(player_name))
+    c.execute('SELECT * FROM league WHERE league_name="{}"'.format(league_name))
     data = c.fetchall()
     c.close()
     return data
 
 
-def edit_dealer_data(player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id):
+def edit_dealer_data(league_id, league_name, country, sponsors, current_champions, top_scorer, league_id1, league_name1, country1, sponsors1, current_champions1, top_scorer1):
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -86,15 +86,12 @@ def edit_dealer_data(player_id, player_name_surname, position, nationality, play
     )
     
     c = mydb.cursor(buffered=True)
-    c.execute("UPDATE TRAIN SET player_id=%s, player_name_surname=%s, position=%s, nationality=%s, player_contract_start_date=%s, player_contract_end_date=%s, age=%s, current_market_value=%s, team_id=%s WHERE "
-              "player_id=%s, player_name_surname=%s, position=%s, nationality=%s, player_contract_start_date=%s, player_contract_end_date=%s, age=%s, current_market_value=%s, team_id=%s", (player_id, player_name_surname, position, nationality, player_contract_start_date, player_contract_end_date, age, current_market_value, team_id))
+    c.execute("UPDATE league SET league_id=%s, league_name=%s, country=%s, sponsors=%s, current_champions=%s, top_scorer=%s WHERE league_id=%s", (league_id1, league_name1, country1, sponsors1, current_champions1, top_scorer1, league_id))
     mydb.commit()
-    data = c.fetchall()
     c.close()
-    return data
 
 
-def delete_data(player_name):
+def delete_data(league_name):
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -103,7 +100,7 @@ def delete_data(player_name):
     )
     
     c = mydb.cursor(buffered=True)
-    c.execute('DELETE FROM football_player WHERE player_name_surname="{}"'.format(player_name))
+    c.execute('DELETE FROM league WHERE league_name="{}"'.format(league_name))
     mydb.commit()
     c.close()
 

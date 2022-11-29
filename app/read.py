@@ -5,6 +5,6 @@ from database import view_all_data
 
 def read():
     result = view_all_data()
-    df = pd.DataFrame(result, columns=['player_id', 'player_name_surname', 'position', 'nationality', 'player_contract_start_date', 'player_contract_end_date', 'age', 'current_market_value', 'team_id'])
-    with st.expander("View all players"):
+    df = pd.DataFrame(result, columns=['league_id', 'league_name', 'country', 'sponsors', 'current_champions', 'top_scorer'])
+    with st.expander("View all leagues"):
         st.dataframe(df)

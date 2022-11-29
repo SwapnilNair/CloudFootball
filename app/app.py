@@ -12,23 +12,25 @@ from query import query
 
 def main():
     st.title("⚽ Fußball Datenbank")
+    st.subheader("League Management Tool")
+
     menu = ["Initialize & Query" ,"Add", "Delete", "Update", "View"]
     choice = st.sidebar.selectbox("Operations", menu)
 
     if choice == "Add":
-        st.subheader("Input Player Details")
+        st.subheader("Input League Details")
         create()
 
     elif choice == "View":
-        st.subheader("View Player Roster")
+        st.subheader("View League Roster")
         read()
 
     elif choice == "Update":
-        st.subheader("Update Player Roster")
+        st.subheader("Update League Roster")
         update()
 
     elif choice == "Delete":
-        st.subheader("Delete Player Records")
+        st.subheader("Delete League Records")
         delete()
 
     elif choice == "Initialize & Query":
