@@ -7,7 +7,7 @@ def update():
     result = view_all_data()
     # st.write(result)
     df = pd.DataFrame(result, columns=['league_id', 'league_name', 'country', 'sponsors', 'current_champions', 'top_scorer'])
-    with st.expander("Leagues in roster :"):
+    with st.expander("Current data"):
         st.dataframe(df)
     list_of_leagues = [i[0] for i in view_only_dealer_names()]
     selected_leagues = st.selectbox("Leagues to edit", list_of_leagues)

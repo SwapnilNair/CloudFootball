@@ -17,5 +17,5 @@ def delete():
         st.success("The league has been deleted successfully.")
     new_result = view_all_data()
     df2 = pd.DataFrame(new_result, columns=['league_id', 'league_name', 'country', 'sponsors', 'current_champions', 'top_scorer'])
-    with st.expander("Updated data : "):
+    with st.expander("Updated data"):
         st.dataframe(df2)

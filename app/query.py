@@ -14,7 +14,7 @@ def query():
     if st.button("Run query"):
         result = run_query(query)
         #df = pd.DataFrame(result)
-        with st.expander("View all players"):
+        with st.expander("View data"):
             st.dataframe(result)
 
     st.subheader("Database Details :")
@@ -22,4 +22,4 @@ def query():
     st.image(img1, caption='Database Schema')
 
     img2 = cv2.imread('graphics/erd.png')
-    st.image(img2, caption='Database Schema')
+    st.image(img2, caption='ER Diagram')
