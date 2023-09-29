@@ -4,4 +4,3 @@ A project for the Cloud Computing Course which was deployed on AWS EC2 and AWS R
 - Has an Nginx Proxy on the front for caching.
 - Cool experience all in all, learning about the various platforms, connections and exposing services to to the public internet.
 
-- 
